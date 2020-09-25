@@ -29,7 +29,7 @@ class Signal {}
 
 abstract class AudioEngine {
   // Each pattern has eight steps
-  static const int _resolution = 8; //!! numberOfBeats
+  static const int _resolution = 16; //!! numberOfBeats
   static int step = 0;
 
   // Engine control current state
@@ -51,7 +51,7 @@ abstract class AudioEngine {
   static Map<DRUM_SAMPLE, List<bool>> get _blanktape =>
       Map.fromIterable(DRUM_SAMPLE.values,
           key: (k) => k,
-          value: (v) => List.generate(8, (i) => false)); //!! numberOfBeats
+          value: (v) => List.generate(16, (i) => false)); //!! numberOfBeats
 
   // Track note on/off data
   static Map<DRUM_SAMPLE, List<bool>> _trackdata = _blanktape;
@@ -149,7 +149,7 @@ abstract class AudioEngine {
 
   // Process the next step
   static void next() {
-    step = (step == 7) ? 0 : step + 1;
+    step = (step == 15) ? 0 : step + 1;
     _watch.reset();
 
     trackdata.forEach((DRUM_SAMPLE sample, List<bool> track) {

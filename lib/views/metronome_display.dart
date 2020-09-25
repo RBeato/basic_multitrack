@@ -88,7 +88,7 @@ class _MetronomeDisplayState extends BaseState<MetronomeDisplay> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: List<Widget>.generate(
-                8,
+                16,
                 (i) => Expanded(
                   child: Container(
                     margin: EdgeInsets.all(4),

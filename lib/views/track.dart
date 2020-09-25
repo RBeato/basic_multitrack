@@ -13,7 +13,7 @@ class Track extends BaseWidget {
 }
 
 class _TrackState extends BaseState<Track> {
-  List<bool> _data = List.generate(8, (i) => false);
+  List<bool> _data = List.generate(16, (i) => false);
 
   bool get isRunning => AudioEngine.state != ControlState.READY;
 
@@ -32,18 +32,25 @@ class _TrackState extends BaseState<Track> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: List<Widget>.generate(
-                8,
-                (i) => Expanded(
-                    child: SizedBox.expand(
-                        child: InkWell(
-                            enableFeedback: false,
-                            onTap: () => AudioEngine.on<EditEvent>(
-                                EditEvent(widget.sample, i)),
-                            child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 1),
-                                color: getItemColor(i))))))));
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: List<Widget>.generate(
+          16,
+          (i) => Expanded(
+            child: SizedBox.expand(
+              child: InkWell(
+                enableFeedback: false,
+                onTap: () =>
+                    AudioEngine.on<EditEvent>(EditEvent(widget.sample, i)),
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 1),
+                  color: getItemColor(i),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
