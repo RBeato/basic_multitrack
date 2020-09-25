@@ -7,8 +7,6 @@ enum DRUM_SAMPLE {
   KICK,
   SNARE,
   HAT,
-//   TOM1,
-//   TOM2,
   CRASH,
 }
 
@@ -19,8 +17,6 @@ abstract class Sampler {
     DRUM_SAMPLE.KICK: 'kick',
     DRUM_SAMPLE.SNARE: 'snare',
     DRUM_SAMPLE.HAT: 'hat',
-    // DRUM_SAMPLE.TOM1: 'tom1',
-    // DRUM_SAMPLE.TOM2: 'tom2',
     DRUM_SAMPLE.CRASH: 'crash'
   };
 
@@ -28,8 +24,6 @@ abstract class Sampler {
     Colors.red,
     Colors.amber,
     Colors.purple,
-    // Colors.blue,
-    // Colors.cyan,
     Colors.pink,
   ];
 

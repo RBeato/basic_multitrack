@@ -29,7 +29,7 @@ class Signal {}
 
 abstract class AudioEngine {
   // Each pattern has eight steps
-  static const int _resolution = 8;
+  static const int _resolution = 8; //!! numberOfBeats
   static int step = 0;
 
   // Engine control current state
@@ -50,7 +50,8 @@ abstract class AudioEngine {
   // Generates a new blank track data structure
   static Map<DRUM_SAMPLE, List<bool>> get _blanktape =>
       Map.fromIterable(DRUM_SAMPLE.values,
-          key: (k) => k, value: (v) => List.generate(8, (i) => false));
+          key: (k) => k,
+          value: (v) => List.generate(8, (i) => false)); //!! numberOfBeats
 
   // Track note on/off data
   static Map<DRUM_SAMPLE, List<bool>> _trackdata = _blanktape;

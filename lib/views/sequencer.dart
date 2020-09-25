@@ -13,34 +13,39 @@ class Sequencer extends StatelessWidget {
     double labelWidth = MediaQuery.of(context).size.width / 5;
 
     return Expanded(
-        child: Container(
-            decoration: BoxDecoration(
-              border: Border(top: _border),
-              color: Colors.black45,
-            ),
-            child: Column(
-              children: List<Widget>.generate(
-                  Sampler.samples.length,
-                  (i) => Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(top: _border),
+          color: Colors.black45,
+        ),
+        child: Column(
+          children: List<Widget>.generate(
+            Sampler.samples.length,
+            (i) => Expanded(
+              child: Container(
+                decoration: BoxDecoration(border: Border(bottom: _border)),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    InkWell(
+                      enableFeedback: false,
+                      onTap: () => AudioEngine.on<PadEvent>(PadEvent(
+                          DRUM_SAMPLE.values[i])), //play sample sound on label
                       child: Container(
-                          decoration:
-                              BoxDecoration(border: Border(bottom: _border)),
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                InkWell(
-                                  enableFeedback: false,
-                                  onTap: () => AudioEngine.on<PadEvent>(
-                                      PadEvent(DRUM_SAMPLE.values[i])),
-                                  child: Container(
-                                      width: labelWidth,
-                                      color: Sampler.colors[i].withOpacity(0.2),
-                                      child: Center(
-                                          child: Text(Sampler.samples[
-                                              DRUM_SAMPLE.values[i]]))),
-                                ),
-                                Track(sample: DRUM_SAMPLE.values[i])
-                              ])))),
-            )));
+                          width: labelWidth,
+                          color: Sampler.colors[i].withOpacity(0.2),
+                          child: Center(
+                              child: Text(
+                                  Sampler.samples[DRUM_SAMPLE.values[i]]))),
+                    ),
+                    Track(sample: DRUM_SAMPLE.values[i])
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

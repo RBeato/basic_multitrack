@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_drum_machine_demo/services/sampler.dart';
-import 'package:flutter_drum_machine_demo/views/display.dart';
+import 'package:flutter_drum_machine_demo/views/metronome_display.dart';
 import 'package:flutter_drum_machine_demo/views/sequencer.dart';
 import 'package:flutter_drum_machine_demo/views/transport.dart';
 import 'package:flutter_drum_machine_demo/views/pad-bank.dart';
@@ -28,7 +28,7 @@ class Multitrack extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Display(),
+            MetronomeDisplay(),
             Sequencer(),
             Transport(),
             // PadBank()

@@ -17,34 +17,40 @@ class BPMSelector extends StatelessWidget {
     TextStyle style = Theme.of(context).textTheme.headline5;
 
     return Dialog(
-        backgroundColor: Colors.black38,
-        child: SizedBox.expand(
-            child: Container(
-                padding: EdgeInsets.all(24),
-                child: ListView.builder(
-                    controller: _controller,
-                    itemCount: 255,
-                    itemBuilder: (context, i) => InkWell(
-                        onTap: () {
-                          AudioEngine.bpm = (i + 1);
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                            height: 32,
-                            child: Center(
-                                child: Text((i + 1).toString(),
-                                    style: style))))))));
+      backgroundColor: Colors.black38,
+      child: SizedBox.expand(
+        child: Container(
+          padding: EdgeInsets.all(24),
+          child: ListView.builder(
+            controller: _controller,
+            itemCount: 255,
+            itemBuilder: (context, i) => InkWell(
+              onTap: () {
+                AudioEngine.bpm = (i + 1);
+                Navigator.pop(context);
+              },
+              child: Container(
+                height: 32,
+                child: Center(
+                  child: Text((i + 1).toString(), style: style),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
-class Display extends BaseWidget {
-  Display({Key key}) : super(key: key);
+class MetronomeDisplay extends BaseWidget {
+  MetronomeDisplay({Key key}) : super(key: key);
 
   @override
-  _DisplayState createState() => _DisplayState();
+  _MetronomeDisplayState createState() => _MetronomeDisplayState();
 }
 
-class _DisplayState extends BaseState<Display> {
+class _MetronomeDisplayState extends BaseState<MetronomeDisplay> {
   Color _color = Color.lerp(Colors.brown, Colors.black, 0.7);
 
   String get _label => AudioEngine.bpm.toString() + 'bpm';
@@ -57,10 +63,12 @@ class _DisplayState extends BaseState<Display> {
     TextStyle style = Theme.of(context).textTheme.overline;
 
     return Container(
-        height: 48,
-        color: _color,
-        child: Row(children: <Widget>[
+      height: 48,
+      color: _color,
+      child: Row(
+        children: <Widget>[
           Container(
+              //bpm little display
               padding: EdgeInsets.all(4),
               width: labelWidth,
               child: Container(
@@ -76,21 +84,29 @@ class _DisplayState extends BaseState<Display> {
                               context: context, builder: (_) => BPMSelector()),
                           child: Text(_label, style: style))))),
           Expanded(
-              //metronome display
-              child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: List<Widget>.generate(
-                      8,
-                      (i) => Expanded(
-                          child: Container(
-                              margin: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                  color: (_step == i && _isRunning)
-                                      ? Colors.grey.withOpacity(0.2)
-                                      : Colors.black26,
-                                  border: Border.all(
-                                      color: Colors.yellow.withOpacity(0.12)),
-                                  borderRadius: BorderRadius.circular(2)))))))
-        ]));
+            //metronome display
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: List<Widget>.generate(
+                8,
+                (i) => Expanded(
+                  child: Container(
+                    margin: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: (_step == i && _isRunning)
+                          ? Colors.grey.withOpacity(0.2)
+                          : Colors.black26,
+                      border:
+                          Border.all(color: Colors.yellow.withOpacity(0.12)),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
